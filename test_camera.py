@@ -1,3 +1,5 @@
+# This is just a simple test of the cameras operability.
+
 from picamera2 import Picamera2
 
 picam2 = Picamera2()
