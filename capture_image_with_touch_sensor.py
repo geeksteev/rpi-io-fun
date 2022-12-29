@@ -21,7 +21,7 @@ from picamera2 import Picamera2
 # Variables
 output_pin = 21     # I set these as human readable so as you go through the code its easier to understand.
 input_pin = 17      # The numbers correlate with the GPIO pins that each device is plugged into.
-img_name = time.strftime("%Y%m%d-%H%M%S")   # Set the output filename to a date timestamp to remove the possibility of issues with overwriting existing files.
+img_name = time.strftime("%Y%m%d-%H%M%S") + ".jpg"   # Set the output filename to a date timestamp to remove the possibility of issues with overwriting existing files.
 
 # GPIO Setup
 GPIO.setwarnings(False)     # This is optional. Disable warnings, they tend to be a bit verbose.
@@ -50,13 +50,15 @@ def detect_input(pin):      # Detects input from whatever input device you're us
 
 def send_output():      # Sends output from whatever output device you're using.
     GPIO.output(output_pin, True)
+    time.sleep(0.1)
     GPIO.output(output_pin, False)
 
 try:
     while True:
         if detect_input(input_pin): 
             capture_image(img_name) 
-            send_output()   
+            send_output()
 
 except KeyboardInterrupt:   
     GPIO.cleanup()  # This resets the GPIO pins to their unconfigured state so devices don't continue to run after stopping the program.
+    exit()
