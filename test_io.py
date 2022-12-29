@@ -1,3 +1,5 @@
+# This script is to test the functionality of most IO modules. Some IO modules have different default states (On/Off).
+
 import RPi.GPIO as GPIO
 import time
 
